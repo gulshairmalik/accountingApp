@@ -13,6 +13,7 @@ const hogs99 = require('./routes/hogs99')
 const jackson123 = require('./routes/jackson123')
 const goodguys = require('./routes/goodguys')
 const austin2 = require('./routes/austin2')
+const htownrc = require('./routes/htownrc')
 
 //Using Routes
 app.use('/',home)
@@ -22,6 +23,7 @@ app.use('/hogs99',hogs99)
 app.use('/jackson123',jackson123)
 app.use('/goodguys',goodguys)
 app.use('/austin2',austin2)
+app.use('/htownrc',htownrc)
 
 //Setting View Engine
 app.set('view engine', 'pug')
