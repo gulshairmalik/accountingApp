@@ -17,6 +17,7 @@ const randyclay = require('./routes/randyclay')
 const woodyma = require('./routes/woodyma')
 const chancexiii = require('./routes/chancexiii')
 const vangav = require('./routes/vangav')
+const pspev = require('./routes/pspev')
 
 //Using Routes
 app.use('/',home)
@@ -31,6 +32,7 @@ app.use('/randyclay',randyclay)
 app.use('/woodyma',woodyma)
 app.use('/chancexiii',chancexiii)
 app.use('/vangav',vangav)
+app.use('/pspev',pspev)
 
 //Setting View Engine
 app.set('view engine', 'pug')
