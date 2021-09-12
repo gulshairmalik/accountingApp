@@ -5,79 +5,21 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js")
-        title Web Scrapper
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js')
+        title Accounting App
     body
         .container
             .jumbotron
-                h1.text-center Web Scrapper
-            
-            .row
-                .col-md-6
-                    label(for="form") Search in Miami:
-                    form.form-inline(action='javascript:searchInMiami()' name='form')
-                        .form-group
-                            input#input.form-control(type='text' placeholder="Search Address in Miami" required)
-
-                            button#submit.btn.btn-default(type='submit') Search
-                    span#error.text-danger
-                    br
-                    .row
-                        .col-sm-3
-                            a#pdf.btn.btn-primary(href="#",style="display:none") Get PDF
-                        .col-sm-3
-                            a#csv.btn.btn-primary(href="#",style="display:none") Get CSV
+                h1.text-center Accounting App
+            .row 
+                .col-md-3
+                    ul.list-group
+                        a(href='/riverrat' style='text-decoration: none')
+                            li(style='cursor: pointer').list-group-item.d-flex.justify-content-between.align-items-center RIVERRAT
                 
-                .col-md-6
-                    label(for="form1") Search in Palm:
-                    form.form-inline(action='javascript:searchInPalm()' name='form1')
-                        .form-group
-                            input#input1.form-control(type='text' placeholder="Search Address in Palm" required)
-
-                            button#submit1.btn.btn-default(type='submit') Search
-                    span#error1.text-danger
-                    br
-                    .row
-                        .col-sm-3
-                            a#pdf1.btn.btn-primary(href="#",style="display:none") Get PDF
-                        .col-sm-3
-                            a#csv1.btn.btn-primary(href="#",style="display:none") Get CSV
-                    br
-                    button#getTax.btn.btn-success(onclick="javascript:searchTaxInPalm()",style="display:none") Search For Tax
-                    span#error2.text-danger                 
-            
-                    #tax(style="display:none") 
-                        label Property Tax Information:
-                        .row
-                            .col-sm-3
-                                a#pdf2.btn.btn-primary(href="#") Get PDF
-                            .col-sm-3
-                                a#csv2.btn.btn-primary(href="#") Get CSV
-                    br
-                    button#get3Tax.btn.btn-success(onclick="javascript:searchTaxBillInPalm()",style="display:none") Get Tax Bills
-                
-                    #taxBill(style="display:none") 
-                        label Last Three Tax Bills:
-                        .row
-                            .col-sm-3
-                                a#pdfTax1.btn.btn-primary(href="#") Get Bill1 PDF
-                                a#csvTax1.btn.btn-primary(href="#",style="margin-top:10%;") Get Bill1 CSV
-                            .col-sm-3
-                                a#pdfTax2.btn.btn-primary(href="#") Get Bill2 PDF
-                                a#csvTax2.btn.btn-primary(href="#",style="margin-top:10%;") Get Bill2 CSV
-                            .col-sm-3
-                                a#pdfTax3.btn.btn-primary(href="#") Get Bill3 PDF
-                                a#csvTax3.btn.btn-primary(href="#",style="margin-top:10%;") Get Bill3 CSV
-                    br
-                    button#getAssesment.btn.btn-success(onclick="javascript:searchAssesmentInPalm()",style="display:none") Get Special Assesment
-                    #assesment(style="display:none") 
-                        label Special Assesment:
-                        .row
-                            .col-sm-4
-                                a#assesPdf.btn.btn-primary(href="#") Get Assesment PDF
-                        
-                           
-        script
-            include ./script.js
+                .col-md-9
+                    h4(style='margin-top: 10px') Sidebar contains the list of agents. Click any agent for which you want to perform accounting.
+                    block content
             
             

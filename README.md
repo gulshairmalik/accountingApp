@@ -1,3 +1,3 @@
-# Web Scrapping with Node Puppeteer
+# Accounting App
 
-A project to scrape the data from different websites using Node.js.
+A project to perform some calculations on transactions data.

@@ -1,29 +1,21 @@
 {
-  "name": "scrape",
+  "name": "datatoolwebapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "A project to scrape the data from different websites using Node.js.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gulshairmalik/node-puppeteer-Scrape.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gulshairmalik/node-puppeteer-Scrape/issues"
-  },
-  "homepage": "https://github.com/gulshairmalik/node-puppeteer-Scrape#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "convert-excel-to-json": "^1.7.0",
+    "excel4node": "^1.7.2",
     "express": "^4.17.1",
-    "node-table-to-csv": "^0.1.0",
-    "pug": "^2.0.4",
-    "puppeteer": "^1.20.0"
-  },
-  "engines": {
-    "node": "10.x"
+    "fs-extra": "^10.0.0",
+    "moment": "^2.29.1",
+    "multer": "^1.4.3",
+    "pug": "^3.0.2",
+    "simple-json-db": "^1.2.3"
   }
 }
