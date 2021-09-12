@@ -18,6 +18,7 @@ const woodyma = require('./routes/woodyma')
 const chancexiii = require('./routes/chancexiii')
 const vangav = require('./routes/vangav')
 const pspev = require('./routes/pspev')
+const charsh = require('./routes/charsh')
 
 //Using Routes
 app.use('/',home)
@@ -33,6 +34,7 @@ app.use('/woodyma',woodyma)
 app.use('/chancexiii',chancexiii)
 app.use('/vangav',vangav)
 app.use('/pspev',pspev)
+app.use('/charsh',charsh)
 
 //Setting View Engine
 app.set('view engine', 'pug')
