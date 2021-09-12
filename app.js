@@ -4,7 +4,7 @@ const app = express()
 
 app.use(express.json())
 
-//Requring Routes Files
+// Requring Routes Files
 const home = require('./routes/home')
 const riverrat = require('./routes/riverrat')
 const sethplayer = require('./routes/sethplayer')
@@ -19,8 +19,9 @@ const chancexiii = require('./routes/chancexiii')
 const vangav = require('./routes/vangav')
 const pspev = require('./routes/pspev')
 const charsh = require('./routes/charsh')
+const joeyspotsa = require('./routes/joeyspotsa')
 
-//Using Routes
+// Using Routes
 app.use('/',home)
 app.use('/riverrat',riverrat)
 app.use('/sethplayer',sethplayer)
@@ -35,8 +36,9 @@ app.use('/chancexiii',chancexiii)
 app.use('/vangav',vangav)
 app.use('/pspev',pspev)
 app.use('/charsh',charsh)
+app.use('/joeyspotsa',joeyspotsa)
 
-//Setting View Engine
+// Setting View Engine
 app.set('view engine', 'pug')
 app.set('views',path.join(__dirname, 'views'))
 
