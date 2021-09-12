@@ -12,6 +12,7 @@ const sethplayer = require('./routes/sethplayer')
 const hogs99 = require('./routes/hogs99')
 const jackson123 = require('./routes/jackson123')
 const goodguys = require('./routes/goodguys')
+const austin2 = require('./routes/austin2')
 
 //Using Routes
 app.use('/',home)
@@ -20,6 +21,7 @@ app.use('/sethplayer',sethplayer)
 app.use('/hogs99',hogs99)
 app.use('/jackson123',jackson123)
 app.use('/goodguys',goodguys)
+app.use('/austin2',austin2)
 
 //Setting View Engine
 app.set('view engine', 'pug')
