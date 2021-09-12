@@ -15,6 +15,7 @@ const austin2 = require('./routes/austin2')
 const htownrc = require('./routes/htownrc')
 const randyclay = require('./routes/randyclay')
 const woodyma = require('./routes/woodyma')
+const chancexiii = require('./routes/chancexiii')
 
 //Using Routes
 app.use('/',home)
@@ -27,6 +28,7 @@ app.use('/austin2',austin2)
 app.use('/htownrc',htownrc)
 app.use('/randyclay',randyclay)
 app.use('/woodyma',woodyma)
+app.use('/chancexiii',chancexiii)
 
 //Setting View Engine
 app.set('view engine', 'pug')
