@@ -5,10 +5,10 @@ const xl = require('excel4node')
 const wb = new xl.Workbook()
 const ws = wb.addWorksheet('JACKSON123')
 const JSONdb = require('simple-json-db')
-const db = new JSONdb('./Controllers/Hogs99/db.json')
+const db = new JSONdb('./Controllers/Jackson123/db.json')
 
 exports.getIndex = (req,res) => {
-    res.render("hogs99")
+    res.render("jackson123")
 }
 
 exports.getCalculatedData = (req,res) => {
@@ -26,8 +26,8 @@ exports.getCalculatedData = (req,res) => {
     const lastWeekMakeUp = dbData !== null && dbData[dbData.length - 1]["makeUp"] < 0 ? Math.abs(dbData[dbData.length - 1]["makeUp"]) : 0
     let totalAmountOfWeek = result[Object.keys(result)[0]].filter((x, i) => i !== 0).map((y) => y["F"]).reduce((a, b) => a + b, 0)
     totalAmountOfWeek = dbData !== null && dbData[dbData.length - 1]["makeUp"] < 0 ? (totalAmountOfWeek + dbData[dbData.length - 1]["makeUp"]) : totalAmountOfWeek
-    const scooterTotal = totalAmountOfWeek > 0 ? ((totalAmountOfWeek * 0.60) + lastWeekMakeUp).toFixed(2) : totalEarned
-    const hogs99Total = totalAmountOfWeek > 0 ? (totalAmountOfWeek * 0.40).toFixed(2) : 0
+    const scooterTotal = totalAmountOfWeek > 0 ? ((totalAmountOfWeek * 0.50) + lastWeekMakeUp).toFixed(2) : totalEarned
+    const jackson123Total = totalAmountOfWeek > 0 ? (totalAmountOfWeek * 0.50).toFixed(2) : 0
     const makeUp = totalAmountOfWeek > 0 ? 0 : totalAmountOfWeek
     const scooterNet = scooterTotal
 
@@ -35,7 +35,7 @@ exports.getCalculatedData = (req,res) => {
         "date": datePeriod.toString(),
         "total": totalEarned,
         "scooterTotal": scooterTotal,
-        "hogs99Total": hogs99Total,
+        "jackson123Total": jackson123Total,
         "makeUp": makeUp,
         "headFees": 0,
         "scooterNet": scooterNet
@@ -50,8 +50,8 @@ exports.getCalculatedData = (req,res) => {
         "Date",
         "Total",
         "Scooter Total",
-        "Hogs99 Total",
-        "Hogs99 Makeup",
+        "Jackson123 Total",
+        "Jackson123 Makeup",
         "Head Fees",
         "Scooter Net"
     ]
@@ -103,8 +103,8 @@ exports.getCalculatedData = (req,res) => {
         rowIndex++
     }) 
 
-    wb.write('./uploads/hogs99.xlsx', (err, stat) => {
-        res.download('./uploads/hogs99.xlsx', (err) => {
+    wb.write('./uploads/jackson123.xlsx', (err, stat) => {
+        res.download('./uploads/jackson123.xlsx', (err) => {
             fsExtra.emptyDirSync("./uploads")
         })
     })
