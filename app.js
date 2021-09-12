@@ -9,11 +9,13 @@ app.use(express.json())
 const home = require('./routes/home')
 const riverrat = require('./routes/riverrat')
 const sethplayer = require('./routes/sethplayer')
+const hogs99 = require('./routes/hogs99')
 
 //Using Routes
 app.use('/',home)
 app.use('/riverrat',riverrat)
 app.use('/sethplayer',sethplayer)
+app.use('/hogs99',hogs99)
 
 //Setting View Engine
 app.set('view engine', 'pug')

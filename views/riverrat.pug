@@ -18,7 +18,7 @@ block content
     script.
         document.getElementById("submit").onclick = (event) => {
             event.preventDefault()
-            if (document.getElementById("startDate") !== "" && document.getElementById("endDate") !== "" && document.getElementById("file") !== "") {
+            if (document.getElementById("startDate").value !== "" && document.getElementById("endDate").value !== "" && document.getElementById("file").value !== "") {
                 const formData = new FormData()
                 formData.append("startDate", document.getElementById("startDate").value)
                 formData.append("endDate", document.getElementById("endDate").value)

@@ -1,6 +1,6 @@
 extends index 
 block content
-    h3 SethPlayer
+    h3 Hogs99
     form(method='POST' action='#' enctype='multipart/form-data').form-horizontal
         .col-lg-4(style='padding-left: 0px')
             label Start Date
@@ -25,13 +25,13 @@ block content
                 formData.append("file", document.getElementById("file").files[0])
                 axios({
                     method: "post",
-                    url: "/sethplayer/getCalculatedFile",
+                    url: "/hogs99/getCalculatedFile",
                     data: formData,
                     headers: { "Content-Type": "multipart/form-data" },
                     responseType: 'arraybuffer'
                 })
                 .then(response => {
-                    downloadFile(response.data, "sethplayer.xlsx", 'application/xlsx')
+                    downloadFile(response.data, "hogs99.xlsx", 'application/xlsx')
                 })
             }
         }
