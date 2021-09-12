@@ -8,10 +8,12 @@ app.use(express.json())
 //Requring Routes Files
 const home = require('./routes/home')
 const riverrat = require('./routes/riverrat')
+const sethplayer = require('./routes/sethplayer')
 
 //Using Routes
 app.use('/',home)
 app.use('/riverrat',riverrat)
+app.use('/sethplayer',sethplayer)
 
 //Setting View Engine
 app.set('view engine', 'pug')
