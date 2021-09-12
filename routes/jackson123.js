@@ -14,12 +14,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // Controllers
-var JacksonController =  require('../Controllers/Jackson123/JacksonController')
+const JacksonController =  require('../Controllers/Jackson123/JacksonController')
 
-// Get Request to '/hogs99
 router.get('/', JacksonController.getIndex)
-
-// POST Request to '/hogs99/getCalculatedFile'
 router.post('/getCalculatedFile', upload.single("file"), JacksonController.getCalculatedData)
 
 

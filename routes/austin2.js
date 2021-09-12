@@ -14,12 +14,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // Controllers
-var AustinController =  require('../Controllers/Austin2/AustinController')
+const AustinController =  require('../Controllers/Austin2/AustinController')
 
-// Get Request to '/hogs99
 router.get('/', AustinController.getIndex)
-
-// POST Request to '/hogs99/getCalculatedFile'
 router.post('/getCalculatedFile', upload.single("file"), AustinController.getCalculatedData)
 
 

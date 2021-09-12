@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // Controllers
-var RiverRatController =  require('../Controllers/RiverRat/RiverRatController')
+const RiverRatController =  require('../Controllers/RiverRat/RiverRatController')
 
 // Get Request to '/riverrat
 router.get('/', RiverRatController.getIndex)

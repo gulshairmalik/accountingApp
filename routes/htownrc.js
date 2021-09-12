@@ -14,12 +14,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // Controllers
-var HtownrcController =  require('../Controllers/Htownrc/HtownrcController')
+const HtownrcController =  require('../Controllers/Htownrc/HtownrcController')
 
-// Get Request to '/hogs99
 router.get('/', HtownrcController.getIndex)
-
-// POST Request to '/hogs99/getCalculatedFile'
 router.post('/getCalculatedFile', upload.single("file"), HtownrcController.getCalculatedData)
 
 

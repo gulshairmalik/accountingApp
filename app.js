@@ -3,7 +3,6 @@ const path = require('path')
 const app = express()
 
 app.use(express.json())
-// app.use(express.urlencoded({ extended: true }))
 
 //Requring Routes Files
 const home = require('./routes/home')
@@ -14,6 +13,7 @@ const jackson123 = require('./routes/jackson123')
 const goodguys = require('./routes/goodguys')
 const austin2 = require('./routes/austin2')
 const htownrc = require('./routes/htownrc')
+const randyclay = require('./routes/randyclay')
 
 //Using Routes
 app.use('/',home)
@@ -24,6 +24,7 @@ app.use('/jackson123',jackson123)
 app.use('/goodguys',goodguys)
 app.use('/austin2',austin2)
 app.use('/htownrc',htownrc)
+app.use('/randyclay',randyclay)
 
 //Setting View Engine
 app.set('view engine', 'pug')

@@ -14,10 +14,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // Controllers
-const SethPlayerController =  require('../Controllers/SethPlayer/SethPlayerController')
+const RandyClayController =  require('../Controllers/RandyClay/RandyClayController')
 
-router.get('/', SethPlayerController.getIndex)
-router.post('/getCalculatedFile', upload.single("file"), SethPlayerController.getCalculatedData)
+router.get('/', RandyClayController.getIndex)
+router.post('/getCalculatedFile', upload.single("file"), RandyClayController.getCalculatedData)
 
 
 // Exporting Router Object to server
