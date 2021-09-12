@@ -6,9 +6,11 @@ app.use(express.json())
 // app.use(express.urlencoded({ extended: true }))
 
 //Requring Routes Files
+const home = require('./routes/home')
 const riverrat = require('./routes/riverrat')
 
 //Using Routes
+app.use('/',home)
 app.use('/riverrat',riverrat)
 
 //Setting View Engine
