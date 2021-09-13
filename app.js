@@ -21,6 +21,7 @@ const pspev = require('./routes/pspev')
 const charsh = require('./routes/charsh')
 const joeyspotsa = require('./routes/joeyspotsa')
 const barcoonma = require('./routes/barcoonma')
+const eagscoot = require('./routes/eagscoot')
 
 // Using Routes
 app.use('/',home)
@@ -39,6 +40,7 @@ app.use('/pspev',pspev)
 app.use('/charsh',charsh)
 app.use('/joeyspotsa',joeyspotsa)
 app.use('/barcoonma',barcoonma)
+app.use('/eagscoot',eagscoot)
 
 // Setting View Engine
 app.set('view engine', 'pug')
