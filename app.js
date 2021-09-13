@@ -23,6 +23,7 @@ const joeyspotsa = require('./routes/joeyspotsa')
 const barcoonma = require('./routes/barcoonma')
 const eagscoot = require('./routes/eagscoot')
 const arkrick = require('./routes/arkrick')
+const m508 = require('./routes/m508')
 
 // Using Routes
 app.use('/',home)
@@ -43,6 +44,7 @@ app.use('/joeyspotsa',joeyspotsa)
 app.use('/barcoonma',barcoonma)
 app.use('/eagscoot',eagscoot)
 app.use('/arkrick',arkrick)
+app.use('/m508',m508)
 
 // Setting View Engine
 app.set('view engine', 'pug')
