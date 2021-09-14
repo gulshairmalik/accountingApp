@@ -25,6 +25,7 @@ const eagscoot = require('./routes/eagscoot')
 const arkrick = require('./routes/arkrick')
 const m508 = require('./routes/m508')
 const zs = require('./routes/zs')
+const jd30 = require('./routes/jd30')
 
 // Using Routes
 app.use('/',home)
@@ -47,6 +48,7 @@ app.use('/eagscoot',eagscoot)
 app.use('/arkrick',arkrick)
 app.use('/m508',m508)
 app.use('/zs',zs)
+app.use('/jd30',jd30)
 
 // Setting View Engine
 app.set('view engine', 'pug')
