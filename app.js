@@ -26,6 +26,7 @@ const arkrick = require('./routes/arkrick')
 const m508 = require('./routes/m508')
 const zs = require('./routes/zs')
 const jd30 = require('./routes/jd30')
+const mastkala1 = require('./routes/mastkala1')
 
 // Using Routes
 app.use('/',home)
@@ -49,6 +50,7 @@ app.use('/arkrick',arkrick)
 app.use('/m508',m508)
 app.use('/zs',zs)
 app.use('/jd30',jd30)
+app.use('/mastkala1',mastkala1)
 
 // Setting View Engine
 app.set('view engine', 'pug')
