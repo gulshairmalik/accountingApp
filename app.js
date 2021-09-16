@@ -56,6 +56,8 @@ app.use('/mastkala1',mastkala1)
 app.set('view engine', 'pug')
 app.set('views',path.join(__dirname, 'views'))
 
+app.use(express.static(path.join(__dirname, 'views')))
+
 
 app.listen(process.env.PORT || 3000)
 
