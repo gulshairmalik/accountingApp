@@ -99,7 +99,8 @@ exports.getCalculatedData = (req,res) => {
 
     wb.write('./uploads/charsh.xlsx', (err, stat) => {
         res.download('./uploads/charsh.xlsx', (err) => {
-            fsExtra.emptyDirSync("./uploads")
+            fsExtra.removeSync("./uploads/charsh.xlsx")
+            fsExtra.removeSync(`./uploads/${req.file.originalname}`)
         })
     })
 
