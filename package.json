@@ -1,9 +1,11 @@
 {
-  "name": "datatoolwebapp",
+  "name": "accounting-app",
+  "productName": "Accounting App",
   "version": "1.0.0",
-  "description": "A project to scrape the data from different websites using Node.js.",
+  "description": "A project to perform some calculations on transactions data using Node.js.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": "app.js",
