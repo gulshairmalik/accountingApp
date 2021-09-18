@@ -29,6 +29,7 @@ const m508 = require('./routes/m508')
 const zs = require('./routes/zs')
 const jd30 = require('./routes/jd30')
 const mastkala1 = require('./routes/mastkala1')
+const samfulk31 = require('./routes/samfulk31')
 
 // Using Routes
 app.use('/',home)
@@ -55,6 +56,7 @@ app.use('/m508',m508)
 app.use('/zs',zs)
 app.use('/jd30',jd30)
 app.use('/mastkala1',mastkala1)
+app.use('/samfulk31',samfulk31)
 
 // Setting View Engine
 app.set('view engine', 'pug')
