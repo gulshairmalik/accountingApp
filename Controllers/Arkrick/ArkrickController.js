@@ -1,5 +1,7 @@
 const excelToJson = require('convert-excel-to-json')
 const moment = require('moment')
+const fs = require('fs')
+const allMakeup = JSON.parse(fs.readFileSync('./makeup.json'))
 const fsExtra = require('fs-extra')
 const xl = require('excel4node')
 const wb = new xl.Workbook()
@@ -13,6 +15,7 @@ exports.getIndex = (req,res) => {
 
 exports.getCalculatedData = (req,res) => {
 
+    const startMakeup = allMakeup.hasOwnProperty("arkrick") ? allMakeup["arkrick"] : 0
     const datePeriod = `${moment(req.body.startDate).format("MM/DD")} - ${moment(req.body.endDate).format("MM/DD")}`
 
     // Getting Data from DB
@@ -23,10 +26,10 @@ exports.getCalculatedData = (req,res) => {
     })
 
     const totalEarned = result[Object.keys(result)[0]].filter((x, i) => i !== 0).map((y) => y["F"]).reduce((a, b) => a + b, 0)
-    const lastWeekMakeUp = dbData !== null && dbData[dbData.length - 1]["makeUp"] < 0 ? Math.abs(dbData[dbData.length - 1]["makeUp"]) : 0
+    const lastWeekMakeUp = dbData === null ? startMakeup : dbData[dbData.length - 1]["makeUp"] < 0 ? dbData[dbData.length - 1]["makeUp"] : 0
     let totalAmountOfWeek = result[Object.keys(result)[0]].filter((x, i) => i !== 0).map((y) => y["F"]).reduce((a, b) => a + b, 0)
-    totalAmountOfWeek = dbData !== null && dbData[dbData.length - 1]["makeUp"] < 0 ? (totalAmountOfWeek + dbData[dbData.length - 1]["makeUp"]) : totalAmountOfWeek
-    const scooterTotal = totalAmountOfWeek > 0 ? (((totalAmountOfWeek * 0.70) / 2) + (lastWeekMakeUp / 2)).toFixed(2) : (totalEarned / 2)
+    totalAmountOfWeek = totalAmountOfWeek + lastWeekMakeUp
+    const scooterTotal = totalAmountOfWeek > 0 ? (((totalAmountOfWeek * 0.70) / 2) + (Math.abs(lastWeekMakeUp) / 2)).toFixed(2) : (totalEarned / 2)
     const arkrickTotal = totalAmountOfWeek > 0 ? (totalAmountOfWeek * 0.30).toFixed(2) : 0
     const makeUp = totalAmountOfWeek > 0 ? 0 : totalAmountOfWeek
     const scooterNet = scooterTotal

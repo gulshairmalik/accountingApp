@@ -1,5 +1,7 @@
 const excelToJson = require('convert-excel-to-json')
 const moment = require('moment')
+const fs = require('fs')
+const allMakeup = JSON.parse(fs.readFileSync('./makeup.json'))
 const fsExtra = require('fs-extra')
 const xl = require('excel4node')
 const wb = new xl.Workbook()
@@ -45,6 +47,7 @@ exports.getCalculatedData = (req,res) => {
     if (dbData1) db1.set('data', JSON.stringify([...dbData1, data1]))
     else db1.set('data', JSON.stringify([data1]))
 
+    const startMakeup = allMakeup.hasOwnProperty("redraider") ? allMakeup["redraider"] : 0
     // Getting Data from DB For RedRaider
     const dbData2 = db2.JSON().data !== '' ? JSON.parse(db2.JSON().data) : null
         
@@ -53,11 +56,11 @@ exports.getCalculatedData = (req,res) => {
     })
 
     const totalEarned = result2[Object.keys(result2)[0]].filter((x, i) => i !== 0).map((y) => y["F"]).reduce((a, b) => a + b, 0)
-    const lastWeekMakeUp = dbData2 !== null && dbData2[dbData2.length - 1]["makeUp"] < 0 ? Math.abs(dbData2[dbData2.length - 1]["makeUp"]) : 0
+    const lastWeekMakeUp = dbData2 === null ? startMakeup : dbData2[dbData2.length - 1]["makeUp"] < 0 ? dbData2[dbData2.length - 1]["makeUp"] : 0
     let totalAmountOfWeek2 = result2[Object.keys(result2)[0]].filter((x, i) => i !== 0).map((y) => y["F"]).reduce((a, b) => a + b, 0)
-    totalAmountOfWeek2 = dbData2 !== null && dbData2[dbData2.length - 1]["makeUp"] < 0 ? (totalAmountOfWeek2 + dbData2[dbData2.length - 1]["makeUp"]) : totalAmountOfWeek2
-    const scooterTotal2 = totalAmountOfWeek2 > 0 ? (((totalAmountOfWeek2 * 0.60) / 2) + (lastWeekMakeUp / 2)).toFixed(2) : (totalEarned / 2)
-    const woody19Total2 = totalAmountOfWeek2 > 0 ? (((totalAmountOfWeek2 * 0.60) / 2) + (lastWeekMakeUp / 2)).toFixed(2) : (totalEarned / 2)
+    totalAmountOfWeek2 = totalAmountOfWeek2 + lastWeekMakeUp
+    const scooterTotal2 = totalAmountOfWeek2 > 0 ? (((totalAmountOfWeek2 * 0.60) / 2) + (Math.abs(lastWeekMakeUp) / 2)).toFixed(2) : (totalEarned / 2)
+    const woody19Total2 = totalAmountOfWeek2 > 0 ? (((totalAmountOfWeek2 * 0.60) / 2) + (Math.abs(lastWeekMakeUp) / 2)).toFixed(2) : (totalEarned / 2)
     const redRaiderTotal = totalAmountOfWeek2 > 0 ? (totalAmountOfWeek2 * 0.40).toFixed(2) : 0
     const makeUp = totalAmountOfWeek2 > 0 ? 0 : totalAmountOfWeek2
     const scooterNet2 = scooterTotal2
