@@ -100,7 +100,7 @@ exports.getCalculatedData = (req,res) => {
                 if (parseInt(record[columnName]) >= 0) ws.cell(rowIndex, columnIndex).style({ font: { color: "#2a753e" } })
                 else ws.cell(rowIndex, columnIndex).style({ font: { color: "#ff2626" } })
             }
-            if (columnName !== "date") ws.cell(rowIndex,columnIndex++).number(parseInt(record[columnName]))
+            if (columnName !== "date") ws.cell(rowIndex,columnIndex++).number(parseFloat(record[columnName]))
             else ws.cell(rowIndex,columnIndex++).string(record[columnName])
         })
         rowIndex++
