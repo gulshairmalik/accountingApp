@@ -16,10 +16,7 @@ const upload = multer({ storage: storage })
 // Controllers
 const Barcoon50Controller =  require('../Controllers/Barcoon50/Barcoon50Controller')
 
-// Get Request to '/riverrat
 router.get('/', Barcoon50Controller.getIndex)
-
-// POST Request to '/riverrat/getCalculatedFile'
 router.post('/getCalculatedFile', upload.single("file"), Barcoon50Controller.getCalculatedData)
 
 

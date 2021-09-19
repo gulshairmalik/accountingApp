@@ -14,10 +14,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // Controllers
-const Jackhigh1Controller =  require('../Controllers/Jackhigh1/Jackhigh1Controller')
+const CostaaaController =  require('../Controllers/Costaaa/CostaaaController')
 
-router.get('/', Jackhigh1Controller.getIndex)
-router.post('/getCalculatedFile', upload.single("file"), Jackhigh1Controller.getCalculatedData)
+router.get('/', CostaaaController.getIndex)
+
+router.post('/getCalculatedFile', upload.single("file"), CostaaaController.getCalculatedData)
 
 
 // Exporting Router Object to server

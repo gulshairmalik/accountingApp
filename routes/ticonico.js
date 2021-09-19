@@ -16,10 +16,7 @@ const upload = multer({ storage: storage })
 // Controllers
 const TiconicoController =  require('../Controllers/Ticonico/TiconicoController')
 
-// Get Request to '/riverrat
 router.get('/', TiconicoController.getIndex)
-
-// POST Request to '/riverrat/getCalculatedFile'
 router.post('/getCalculatedFile', upload.single("file"), TiconicoController.getCalculatedData)
 
 

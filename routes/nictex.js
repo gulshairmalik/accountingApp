@@ -16,10 +16,7 @@ const upload = multer({ storage: storage })
 // Controllers
 const NictexController =  require('../Controllers/Nictex/NictexController')
 
-// Get Request to '/riverrat
 router.get('/', NictexController.getIndex)
-
-// POST Request to '/riverrat/getCalculatedFile'
 router.post('/getCalculatedFile', upload.single("file"), NictexController.getCalculatedData)
 
 
