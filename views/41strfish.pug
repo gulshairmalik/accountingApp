@@ -1,0 +1,64 @@
+extends index 
+block content
+    h3 41Strfish
+    form(method='POST' action='#' enctype='multipart/form-data').form-horizontal
+        .col-lg-4(style='padding-left: 0px')
+            label Start Date
+            input.form-control(type='date' id='startDate' required)
+        .col-lg-4
+            label End Date
+            input.form-control(type='date' id='endDate' required)
+        .col-lg-4
+            label Choose Excel File
+            input.form-control(type='file' id='file' required)
+        .col-lg-6(style="margin-top: 10px;  padding: 0px")
+            button.btn.btn-primary(type='submit' id='submit') Submit
+            button.btn.btn-danger.btn.btn-default(style='margin-left: 10px' type='reset') Reset
+            
+    script.
+        document.getElementById("submit").onclick = (event) => {
+            event.preventDefault()
+            if (document.getElementById("startDate").value !== "" && document.getElementById("endDate").value !== "" && document.getElementById("file").value !== "") {
+                const formData = new FormData()
+                formData.append("startDate", document.getElementById("startDate").value)
+                formData.append("endDate", document.getElementById("endDate").value)
+                formData.append("file", document.getElementById("file").files[0])
+                axios({
+                    method: "post",
+                    url: "/41strfish/getCalculatedFile",
+                    data: formData,
+                    headers: { "Content-Type": "multipart/form-data" },
+                    responseType: 'arraybuffer'
+                })
+                .then(response => {
+                    downloadFile(response.data, "41strfish.xlsx", 'application/xlsx')
+                })
+            }
+        }
+
+        const downloadFile = (data, filename, mime) => {
+
+            const blob = new Blob([data], {type: mime || 'application/octet-stream'})
+            if (typeof window.navigator.msSaveBlob !== 'undefined') {
+                window.navigator.msSaveBlob(blob, filename)
+                return;
+            }
+
+            // Create a link pointing to the ObjectURL containing the blob
+            const blobURL = window.URL.createObjectURL(blob);
+            const tempLink = document.createElement('a')
+            tempLink.style.display = 'none'
+            tempLink.href = blobURL
+            tempLink.setAttribute('download', filename)
+            
+            if (typeof tempLink.download === 'undefined') {
+                tempLink.setAttribute('target', '_blank')
+            }
+            document.body.appendChild(tempLink)
+            tempLink.click()
+            document.body.removeChild(tempLink)
+            setTimeout(() => {
+                // For Firefox it is necessary to delay revoking the ObjectURL
+                window.URL.revokeObjectURL(blobURL)
+            }, 100)
+        }
