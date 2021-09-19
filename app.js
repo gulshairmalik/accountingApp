@@ -37,6 +37,8 @@ const strfish31 = require('./routes/31strfish')
 const strfish41 = require('./routes/41strfish')
 const strfish51 = require('./routes/51strfish')
 const strfish61 = require('./routes/61strfish')
+const bigkala1 = require('./routes/bigkala1')
+const lilkala1 = require('./routes/lilkala1')
 
 // Using Routes
 app.use('/',home)
@@ -71,6 +73,8 @@ app.use('/31strfish',strfish31)
 app.use('/41strfish',strfish41)
 app.use('/51strfish',strfish51)
 app.use('/61strfish',strfish61)
+app.use('/bigkala1',bigkala1)
+app.use('/lilkala1',lilkala1)
 
 // Setting View Engine
 app.set('view engine', 'pug')
