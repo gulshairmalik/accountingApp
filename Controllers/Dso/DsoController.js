@@ -3,12 +3,12 @@ const moment = require('moment')
 const fsExtra = require('fs-extra')
 const xl = require('excel4node')
 const wb = new xl.Workbook()
-const ws = wb.addWorksheet('MASTKALA1')
+const ws = wb.addWorksheet('DSO')
 const JSONdb = require('simple-json-db')
-const db = new JSONdb('./Controllers/Mastkala1/db.json')
+const db = new JSONdb('./Controllers/Dso/db.json')
 
 exports.getIndex = (req,res) => {
-    res.render("mastkala1")
+    res.render("dso")
 }
 
 exports.getCalculatedData = (req,res) => {
@@ -24,14 +24,14 @@ exports.getCalculatedData = (req,res) => {
 
     const totalAmountOfWeek = result[Object.keys(result)[0]].filter((x, i) => i !== 0).map((y) => y["F"]).reduce((a, b) => a + b, 0)
     const scooterTotal = totalAmountOfWeek / 2
-    const mastkala1Total = totalAmountOfWeek / 2
+    const dsoTotal = totalAmountOfWeek / 2
     const scooterNet = scooterTotal
 
     const data = {
         "date": datePeriod.toString(),
         "total": totalAmountOfWeek,
         "scooterTotal": scooterTotal,
-        "mastkala1Total": mastkala1Total,
+        "dsoTotal": dsoTotal,
         "headFees": 0,
         "scooterNet": scooterNet
     }
@@ -45,7 +45,7 @@ exports.getCalculatedData = (req,res) => {
         "Date",
         "Total",
         "Scooter Total",
-        "MastKala1 Total",
+        "Dso Total",
         "Head Fees",
         "Scooter Net"
     ]
@@ -97,9 +97,9 @@ exports.getCalculatedData = (req,res) => {
         rowIndex++
     }) 
 
-    wb.write('./uploads/mastkala1.xlsx', (err, stat) => {
-        res.download('./uploads/mastkala1.xlsx', (err) => {
-            fsExtra.removeSync("./uploads/mastkala1.xlsx")
+    wb.write('./uploads/dso.xlsx', (err, stat) => {
+        res.download('./uploads/dso.xlsx', (err) => {
+            fsExtra.removeSync("./uploads/dso.xlsx")
             fsExtra.removeSync(`./uploads/${req.file.originalname}`)
         })
     })
