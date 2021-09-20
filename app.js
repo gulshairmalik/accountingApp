@@ -41,6 +41,7 @@ const bigkala1 = require('./routes/bigkala1')
 const lilkala1 = require('./routes/lilkala1')
 const zebrafish = require('./routes/zebrafish')
 const villajos = require('./routes/villajos')
+const sc222 = require('./routes/sc222')
 
 // Using Routes
 app.use('/',home)
@@ -79,6 +80,7 @@ app.use('/bigkala1',bigkala1)
 app.use('/lilkala1',lilkala1)
 app.use('/zebrafish',zebrafish)
 app.use('/villajos',villajos)
+app.use('/sc222',sc222)
 
 // Setting View Engine
 app.set('view engine', 'pug')
