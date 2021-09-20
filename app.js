@@ -43,6 +43,7 @@ const zebrafish = require('./routes/zebrafish')
 const villajos = require('./routes/villajos')
 const sc222 = require('./routes/sc222')
 const dso = require('./routes/dso')
+const bmt = require('./routes/bmt')
 
 // Using Routes
 app.use('/',home)
@@ -83,6 +84,7 @@ app.use('/zebrafish',zebrafish)
 app.use('/villajos',villajos)
 app.use('/sc222',sc222)
 app.use('/dso',dso)
+app.use('/bmt',bmt)
 
 // Setting View Engine
 app.set('view engine', 'pug')
