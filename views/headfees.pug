@@ -1,0 +1,30 @@
+extends index 
+block content
+    h3 Head Fees
+    form(method='POST' action='#' enctype='multipart/form-data').form-horizontal
+        .col-lg-12(style='padding-left: 0px')
+            label Choose Excel File
+            input.form-control(type='file' id='file' required)
+        .col-lg-6(style="margin-top: 10px;  padding: 0px")
+            button.btn.btn-primary(type='submit' id='submit') Submit
+            button.btn.btn-danger.btn.btn-default(style='margin-left: 10px' type='reset') Reset
+        .col-lg-12.alert.alert-success(style='display: none; margin-top: 10px' id="alert")
+            strong Success! Head Fess are saved successfully in the app. You can now do other calculations.
+            
+    script.
+        document.getElementById("submit").onclick = (event) => {
+            event.preventDefault()
+            if (document.getElementById("file").value !== "") {
+                const formData = new FormData()
+                formData.append("file", document.getElementById("file").files[0])
+                axios({
+                    method: "post",
+                    url: "/headfees/getCalculatedFile",
+                    data: formData,
+                    headers: { "Content-Type": "multipart/form-data" },
+                })
+                .then(response => {
+                    if (response.status === 200) document.getElementById("alert").style.display = "block"
+                })
+            }
+        }

@@ -6,6 +6,7 @@ app.use(express.json())
 
 // Requring Routes Files
 const home = require('./routes/home')
+const headfees = require('./routes/headfees')
 const riverrat = require('./routes/riverrat')
 const sethplayer = require('./routes/sethplayer')
 const hogs99 = require('./routes/hogs99')
@@ -47,6 +48,7 @@ const bmt = require('./routes/bmt')
 
 // Using Routes
 app.use('/',home)
+app.use('/headfees',headfees)
 app.use('/riverrat',riverrat)
 app.use('/sethplayer',sethplayer)
 app.use('/hogs99',hogs99)
