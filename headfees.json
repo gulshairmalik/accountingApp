@@ -36,5 +36,12 @@
     "VILLAJOS": 5,
     "SC222": 5,
     "DSO": 5,
-    "BMT": 5
+    "BMT": 5,
+    "AgentsPPH": {
+        "AUSTIN2": 2.50,
+        "WOODYMA": 4,
+        "EAGSCOOT": 2.50,
+        "MASTKALA1": 2.50,
+        "SAMFULK31": 4
+    }
 }

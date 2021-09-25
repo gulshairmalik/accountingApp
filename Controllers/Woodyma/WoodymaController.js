@@ -2,6 +2,8 @@ const excelToJson = require('convert-excel-to-json')
 const moment = require('moment')
 const fs = require('fs')
 const allMakeup = JSON.parse(fs.readFileSync('./makeup.json'))
+const headfees = JSON.parse(fs.readFileSync('./headfees.json'))
+const playerCount = JSON.parse(fs.readFileSync('./playersCount.json'))
 const fsExtra = require('fs-extra')
 const xl = require('excel4node')
 const wb = new xl.Workbook()
@@ -39,7 +41,6 @@ exports.getCalculatedData = (req,res) => {
         "total": totalAmountOfWeek1,
         "scooterTotal": scooterTotal1,
         "woody19Total": woody19Total1,
-        "headFees": 0,
         "scooterNet": scooterNet1
     }
 
@@ -72,7 +73,6 @@ exports.getCalculatedData = (req,res) => {
         "woody19Total": woody19Total2,
         "redRaiderTotal": redRaiderTotal,
         "makeUp": makeUp,
-        "headFees": 0,
         "scooterNet": scooterNet2
     }
 
@@ -80,16 +80,16 @@ exports.getCalculatedData = (req,res) => {
     if (dbData2) db2.set('data', JSON.stringify([...dbData2, data2]))
     else db2.set('data', JSON.stringify([data2]))
 
-
+    const headFees = (playerCount.find((x) => x.agentName === "WOODYMA") && headfees.hasOwnProperty("WOODYMA")) ? parseInt(headfees["WOODYMA"] * playerCount.find((x) => x.agentName === "WOODYMA")["playersCount"]).toFixed(2) : 0
 
     const headingColumnNames = [
         "Date",
         "Total",
         "Scooter Total",
         "Woody19 Total",
-        "Head Fees",
         "Scooter Net",
         "",
+        "Head Fees",
         "Combined Scooter Net",
         "",
         "Date",
@@ -98,7 +98,6 @@ exports.getCalculatedData = (req,res) => {
         "Woody19 Total",
         "RedRaider Total",
         "RedRaider Makeup",
-        "Head Fees",
         "Scooter Net"
     ]
 
@@ -107,10 +106,10 @@ exports.getCalculatedData = (req,res) => {
         "total": totalAmountOfWeek1,
         "scooterTotal": scooterTotal1,
         "woody19Total": woody19Total1,
-        "headFees": 0,
         "scooterNet": scooterNet1,
         "null": "",
-        "combinedScooterNet": (parseInt(scooterNet1) + parseInt(scooterNet2)).toFixed(2),
+        "headFees": headFees,
+        "combinedScooterNet": (parseInt(scooterNet1) + parseInt(scooterNet2) - headFees).toFixed(2),
         "null1": "",
         "date1": datePeriod.toString(),
         "total1": totalEarned,
@@ -118,7 +117,6 @@ exports.getCalculatedData = (req,res) => {
         "woody19Total1": woody19Total2,
         "redRaiderTotal": redRaiderTotal,
         "makeUp": makeUp,
-        "headFees1": 0,
         "scooterNet1": scooterNet2
     }
 
@@ -150,11 +148,10 @@ exports.getCalculatedData = (req,res) => {
     headingColumnNames.forEach((x, i) => {
         if (i === 0) ws.column(i + 1).setWidth(12)
         else if (i === 1) ws.column(i + 1).setWidth(12)
-        else if (i === 4) ws.column(i + 1).setWidth(12)
+        else if (i === 6) ws.column(i + 1).setWidth(12)
         else if (i === 7) ws.column(i + 1).setWidth(25)
         else if (i === 9) ws.column(i + 1).setWidth(12)
         else if (i === 10) ws.column(i + 1).setWidth(12)
-        else if (i === 15) ws.column(i + 1).setWidth(12)
         else ws.column(i + 1).setWidth(20)
     })
 
@@ -171,7 +168,7 @@ exports.getCalculatedData = (req,res) => {
     dataToBeWrittenToExcel.forEach( record => {
         let columnIndex = 1
         Object.keys(record ).forEach(columnName => {
-            if (![1, 7, 9, 10].includes(columnIndex)) {
+            if (![1, 6, 9, 10].includes(columnIndex)) {
                 if (parseInt(record[columnName]) >= 0) ws.cell(rowIndex, columnIndex).style({ font: { color: "#2a753e" } })
                 else ws.cell(rowIndex, columnIndex).style({ font: { color: "#ff2626" } })
             }

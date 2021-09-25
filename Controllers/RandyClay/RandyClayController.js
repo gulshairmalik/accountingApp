@@ -1,6 +1,9 @@
 const excelToJson = require('convert-excel-to-json')
 const moment = require('moment')
 const fsExtra = require('fs-extra')
+const fs = require('fs')
+const headfees = JSON.parse(fs.readFileSync('./headfees.json'))
+const playerCount = JSON.parse(fs.readFileSync('./playersCount.json'))
 const xl = require('excel4node')
 const wb = new xl.Workbook()
 const ws = wb.addWorksheet('RANDYCLAY')
@@ -29,7 +32,8 @@ exports.getCalculatedData = (req,res) => {
     const scooterTotal = totalAmountOfWeek > 0 ? ((totalAmountOfWeek * 0.55) + lastWeekMakeUp).toFixed(2) : totalEarned
     const randyClayTotal = totalAmountOfWeek > 0 ? (totalAmountOfWeek * 0.45).toFixed(2) : 0
     const makeUp = totalAmountOfWeek > 0 ? 0 : totalAmountOfWeek
-    const scooterNet = scooterTotal
+    const headFees = (playerCount.find((x) => x.agentName === "RANDYCLAY") && headfees.hasOwnProperty("RANDYCLAY")) ? parseInt(headfees["RANDYCLAY"] * playerCount.find((x) => x.agentName === "RANDYCLAY")["playersCount"]).toFixed(2) : 0
+    const scooterNet = scooterTotal - headFees
 
     const data = {
         "date": datePeriod.toString(),
@@ -37,7 +41,7 @@ exports.getCalculatedData = (req,res) => {
         "scooterTotal": scooterTotal,
         "randyClayTotal": randyClayTotal,
         "makeUp": makeUp,
-        "headFees": 0,
+        "headFees": headFees,
         "scooterNet": scooterNet
     }
 

@@ -2,10 +2,12 @@ const excelToJson = require('convert-excel-to-json')
 const moment = require('moment')
 const fs = require('fs')
 const allMakeup = JSON.parse(fs.readFileSync('./makeup.json'))
+const headfees = JSON.parse(fs.readFileSync('./headfees.json'))
+const playerCount = JSON.parse(fs.readFileSync('./playersCount.json'))
 const fsExtra = require('fs-extra')
 const xl = require('excel4node')
 const wb = new xl.Workbook()
-const ws = wb.addWorksheet('SC222')
+const ws = wb.addWorksheet('SCC222')
 const JSONdb = require('simple-json-db')
 const db = new JSONdb('./Controllers/Sc222/db.json')
 
@@ -15,7 +17,7 @@ exports.getIndex = (req,res) => {
 
 exports.getCalculatedData = (req,res) => {
 
-  const startMakeup = allMakeup.hasOwnProperty("sc222") ? allMakeup["sc222"] : 0
+  const startMakeup = allMakeup.hasOwnProperty("scc222") ? allMakeup["scc222"] : 0
   const datePeriod = `${moment(req.body.startDate).format("MM/DD")} - ${moment(req.body.endDate).format("MM/DD")}`
 
   // Getting Data from DB
@@ -32,15 +34,16 @@ exports.getCalculatedData = (req,res) => {
   const scooterTotal = totalAmountOfWeek > 0 ? ((totalAmountOfWeek * 0.70) + Math.abs(lastWeekMakeUp)).toFixed(2) : totalEarned
   const sc222Total = totalAmountOfWeek > 0 ? (totalAmountOfWeek * 0.30).toFixed(2) : 0
   const makeUp = totalAmountOfWeek > 0 ? 0 : totalAmountOfWeek
-  const scooterNet = scooterTotal
+  const headFees = (playerCount.find((x) => x.agentName === "SCC222") && headfees.hasOwnProperty("SCC222")) ? parseInt(headfees["SCC222"] * playerCount.find((x) => x.agentName === "SCC222")["playersCount"]).toFixed(2) : 0
+  const scooterNet = scooterTotal - headFees
 
   const data = {
       "date": datePeriod.toString(),
       "total": totalEarned,
       "scooterTotal": scooterTotal,
-      "sc222Total": sc222Total,
+      "scc222Total": sc222Total,
       "makeUp": makeUp,
-      "headFees": 0,
+      "headFees": headFees,
       "scooterNet": scooterNet
   }
 
@@ -53,8 +56,8 @@ exports.getCalculatedData = (req,res) => {
       "Date",
       "Total",
       "Scooter Total",
-      "Sc222 Total",
-      "Sc222 Makeup",
+      "Scc222 Total",
+      "Scc222 Makeup",
       "Head Fees",
       "Scooter Net"
   ]
@@ -105,9 +108,9 @@ exports.getCalculatedData = (req,res) => {
     rowIndex++
   })
   
-  wb.write('./uploads/sc222.xlsx', (err, stat) => {
-    res.download('./uploads/sc222.xlsx', (err) => {
-      fsExtra.removeSync("./uploads/sc222.xlsx")
+  wb.write('./uploads/scc222.xlsx', (err, stat) => {
+    res.download('./uploads/scc222.xlsx', (err) => {
+      fsExtra.removeSync("./uploads/scc222.xlsx")
       fsExtra.removeSync(`./uploads/${req.file.originalname}`)
     })
   })
