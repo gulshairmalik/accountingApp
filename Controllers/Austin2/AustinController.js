@@ -28,14 +28,18 @@ exports.getCalculatedData = (req,res) => {
     const totalAmountOfWeek = result[Object.keys(result)[0]].filter((x, i) => i !== 0).map((y) => y["F"]).reduce((a, b) => a + b, 0)
     const scooterTotal = totalAmountOfWeek / 2
     const austin2Total = totalAmountOfWeek / 2
-    const headFees = (playerCount.find((x) => x.agentName === "AUSTIN2") && headfees.hasOwnProperty("AUSTIN2")) ? parseInt(headfees["AUSTIN2"] * playerCount.find((x) => x.agentName === "AUSTIN2")["playersCount"]).toFixed(2) : 0
+    const headFees = (playerCount.find((x) => x.agentName === "AUSTIN2") && headfees.hasOwnProperty("AUSTIN2")) ? parseFloat(headfees["AUSTIN2"] * playerCount.find((x) => x.agentName === "AUSTIN2")["playersCount"]).toFixed(2) : 0
     const scooterNet = scooterTotal - headFees
+    const austin2HF = (playerCount.find((x) => x.agentName === "AUSTIN2") && headfees["AgentsPPH"].hasOwnProperty("AUSTIN2")) ? parseFloat(headfees["AgentsPPH"]["AUSTIN2"] * playerCount.find((x) => x.agentName === "AUSTIN2")["playersCount"]).toFixed(2) : 0
+    const austin2Net = austin2Total - austin2HF
 
     const data = {
         "date": datePeriod.toString(),
         "total": totalAmountOfWeek,
         "scooterTotal": scooterTotal,
         "austin2Total": austin2Total,
+        "austin2HF": austin2HF,
+        "austin2Net": austin2Net,
         "headFees": headFees,
         "scooterNet": scooterNet
     }
@@ -50,6 +54,8 @@ exports.getCalculatedData = (req,res) => {
         "Total",
         "Scooter Total",
         "Austin2 Total",
+        "Austin2 HF",
+        "Austin2 Net",
         "Head Fees",
         "Scooter Net"
     ]

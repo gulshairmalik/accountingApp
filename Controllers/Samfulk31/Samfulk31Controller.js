@@ -28,14 +28,18 @@ exports.getCalculatedData = (req,res) => {
     const totalAmountOfWeek = result[Object.keys(result)[0]].filter((x, i) => i !== 0).map((y) => y["F"]).reduce((a, b) => a + b, 0)
     const scooterTotal = totalAmountOfWeek / 2
     const samFulk31Total = totalAmountOfWeek / 2
-    const headFees = (playerCount.find((x) => x.agentName === "SAMFULK31") && headfees.hasOwnProperty("SAMFULK31")) ? parseInt(headfees["SAMFULK31"] * playerCount.find((x) => x.agentName === "SAMFULK31")["playersCount"]).toFixed(2) : 0
+    const headFees = (playerCount.find((x) => x.agentName === "SAMFULK31") && headfees.hasOwnProperty("SAMFULK31")) ? parseFloat(headfees["SAMFULK31"] * playerCount.find((x) => x.agentName === "SAMFULK31")["playersCount"]).toFixed(2) : 0
     const scooterNet = scooterTotal - headFees
+    const samFulk31HF = (playerCount.find((x) => x.agentName === "SAMFULK31") && headfees["AgentsPPH"].hasOwnProperty("SAMFULK31")) ? parseFloat(headfees["AgentsPPH"]["SAMFULK31"] * playerCount.find((x) => x.agentName === "SAMFULK31")["playersCount"]).toFixed(2) : 0
+    const samFulk31Net = samFulk31Total - samFulk31HF
 
     const data = {
         "date": datePeriod.toString(),
         "total": totalAmountOfWeek,
         "scooterTotal": scooterTotal,
         "samFulk31Total": samFulk31Total,
+        "samFulk31HF": samFulk31HF,
+        "samFulk31Net": samFulk31Net,
         "headFees": headFees,
         "scooterNet": scooterNet
     }
@@ -50,6 +54,8 @@ exports.getCalculatedData = (req,res) => {
         "Total",
         "Scooter Total",
         "SamFulk31 Total",
+        "SamFulk31 HF",
+        "SamFulk31 Net",
         "Head Fees",
         "Scooter Net"
     ]

@@ -34,7 +34,7 @@ exports.getCalculatedData = (req,res) => {
     const scooterTotal = totalAmountOfWeek > 0 ? (((totalAmountOfWeek * 0.50) / 2) + (Math.abs(lastWeekMakeUp) / 2)).toFixed(2) : (totalEarned / 2)
     const strfish51Total = totalAmountOfWeek > 0 ? (totalAmountOfWeek * 0.50).toFixed(2) : 0
     const makeUp = totalAmountOfWeek > 0 ? 0 : totalAmountOfWeek
-    const headFees = (playerCount.find((x) => x.agentName === "STARFISH") && headfees.hasOwnProperty("51STRFISH")) ? parseInt(headfees["51STRFISH"] * playerCount.find((x) => x.agentName === "STARFISH")["playersCount"]).toFixed(2) : 0
+    const headFees = (playerCount.find((x) => x.agentName === "STARFISH") && headfees.hasOwnProperty("51STRFISH")) ? parseFloat(headfees["51STRFISH"] * playerCount.find((x) => x.agentName === "STARFISH")["playersCount"]).toFixed(2) : 0
     const scooterNet = scooterTotal - headFees
 
     const data = {

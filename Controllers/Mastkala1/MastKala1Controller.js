@@ -28,14 +28,18 @@ exports.getCalculatedData = (req,res) => {
     const totalAmountOfWeek = result[Object.keys(result)[0]].filter((x, i) => i !== 0).map((y) => y["F"]).reduce((a, b) => a + b, 0)
     const scooterTotal = totalAmountOfWeek / 2
     const mastkala1Total = totalAmountOfWeek / 2
-    const headFees = (playerCount.find((x) => x.agentName === "MASTKALA1") && headfees.hasOwnProperty("MASTKALA1")) ? parseInt(headfees["MASTKALA1"] * playerCount.find((x) => x.agentName === "MASTKALA1")["playersCount"]).toFixed(2) : 0
+    const headFees = (playerCount.find((x) => x.agentName === "MASTKALA1") && headfees.hasOwnProperty("MASTKALA1")) ? parseFloat(headfees["MASTKALA1"] * playerCount.find((x) => x.agentName === "MASTKALA1")["playersCount"]).toFixed(2) : 0
     const scooterNet = scooterTotal - headFees
+    const mastkala1HF = (playerCount.find((x) => x.agentName === "MASTKALA1") && headfees["AgentsPPH"].hasOwnProperty("MASTKALA1")) ? parseFloat(headfees["AgentsPPH"]["MASTKALA1"] * playerCount.find((x) => x.agentName === "MASTKALA1")["playersCount"]).toFixed(2) : 0
+    const mastkala1Net = mastkala1Total - mastkala1HF
 
     const data = {
         "date": datePeriod.toString(),
         "total": totalAmountOfWeek,
         "scooterTotal": scooterTotal,
         "mastkala1Total": mastkala1Total,
+        "mastkala1HF": mastkala1HF,
+        "mastkala1Net": mastkala1Net,
         "headFees": headFees,
         "scooterNet": scooterNet
     }
@@ -50,6 +54,8 @@ exports.getCalculatedData = (req,res) => {
         "Total",
         "Scooter Total",
         "MastKala1 Total",
+        "MastKala1 HF",
+        "MastKala1 Net",
         "Head Fees",
         "Scooter Net"
     ]

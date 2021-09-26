@@ -97,7 +97,8 @@ exports.getCalculatedData = (req,res) => {
     if (dbData3) db3.set('data', JSON.stringify([...dbData3, data3]))
     else db3.set('data', JSON.stringify([data3]))
 
-    const headFees = (playerCount.find((x) => x.agentName === "EAGSCOOT") && headfees.hasOwnProperty("EAGSCOOT")) ? parseInt(headfees["EAGSCOOT"] * playerCount.find((x) => x.agentName === "EAGSCOOT")["playersCount"]).toFixed(2) : 0
+    const headFees = (playerCount.find((x) => x.agentName === "EAGSCOOT") && headfees.hasOwnProperty("EAGSCOOT")) ? parseFloat(headfees["EAGSCOOT"] * playerCount.find((x) => x.agentName === "EAGSCOOT")["playersCount"]).toFixed(2) : 0
+    const eagscootHF = (playerCount.find((x) => x.agentName === "EAGSCOOT") && headfees["AgentsPPH"].hasOwnProperty("EAGSCOOT")) ? parseFloat(headfees["AgentsPPH"]["EAGSCOOT"] * playerCount.find((x) => x.agentName === "EAGSCOOT")["playersCount"]).toFixed(2) : 0
 
     const headingColumnNames = [
         "Date",
@@ -106,6 +107,7 @@ exports.getCalculatedData = (req,res) => {
         "Awhale Total",
         "Scooter Net",
         "",
+        "EagScoot HF",
         "Head Fees",
         "Combined Scooter Net",
         "",
@@ -129,6 +131,7 @@ exports.getCalculatedData = (req,res) => {
         "awhaleTotal": awhaleTotal,
         "scooterNet": scooterNet1,
         "null": "",
+        "eagscootHF": eagscootHF,
         "headFees": headFees,
         "combinedScooterNet": (parseInt(scooterNet1) + parseInt(scooterNet2) + parseInt(scooterNet3) - headFees).toFixed(2),
         "null1": "",
@@ -173,12 +176,12 @@ exports.getCalculatedData = (req,res) => {
     headingColumnNames.forEach((x, i) => {
         if (i === 0) ws.column(i + 1).setWidth(12)
         else if (i === 1) ws.column(i + 1).setWidth(12)
-        else if (i === 6) ws.column(i + 1).setWidth(12)
-        else if (i === 7) ws.column(i + 1).setWidth(25)
-        else if (i === 9) ws.column(i + 1).setWidth(12)
+        else if (i === 7) ws.column(i + 1).setWidth(12)
+        else if (i === 8) ws.column(i + 1).setWidth(25)
         else if (i === 10) ws.column(i + 1).setWidth(12)
-        else if (i === 15) ws.column(i + 1).setWidth(12)
+        else if (i === 11) ws.column(i + 1).setWidth(12)
         else if (i === 16) ws.column(i + 1).setWidth(12)
+        else if (i === 17) ws.column(i + 1).setWidth(12)
         else ws.column(i + 1).setWidth(20)
     })
 
@@ -195,7 +198,7 @@ exports.getCalculatedData = (req,res) => {
     dataToBeWrittenToExcel.forEach( record => {
         let columnIndex = 1
         Object.keys(record ).forEach(columnName => {
-            if (![1, 6, 9, 10, 15, 16].includes(columnIndex)) {
+            if (![1, 6, 10, 11, 16, 17].includes(columnIndex)) {
                 if (parseInt(record[columnName]) >= 0) ws.cell(rowIndex, columnIndex).style({ font: { color: "#2a753e" } })
                 else ws.cell(rowIndex, columnIndex).style({ font: { color: "#ff2626" } })
             }
