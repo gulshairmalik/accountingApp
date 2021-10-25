@@ -2,12 +2,12 @@ extends index
 block content
     h3 WoodyMa
     form(method='POST' action='#' enctype='multipart/form-data').form-horizontal
-        .col-lg-6(style='padding-left: 0px')
-            label Start Date
-            input.form-control(type='date' id='startDate' required)
-        .col-lg-6
-            label End Date
-            input.form-control(type='date' id='endDate' required)
+        //- .col-lg-6(style='padding-left: 0px')
+        //-     label Start Date
+        //-     input.form-control(type='date' id='startDate' required)
+        //- .col-lg-6
+        //-     label End Date
+        //-     input.form-control(type='date' id='endDate' required)
 
         .col-lg-6(style='padding-left: 0px; margin-top: 10px;')
             label Woody19 Excel File
@@ -23,10 +23,10 @@ block content
     script.
         document.getElementById("submit").onclick = (event) => {
             event.preventDefault()
-            if (document.getElementById("startDate").value !== "" && document.getElementById("endDate").value !== "" && document.getElementById("file1").value !== "" && document.getElementById("file2").value !== "") {
+            if (document.getElementById("file1").value !== "" && document.getElementById("file2").value !== "") {
                 const formData = new FormData()
-                formData.append("startDate", document.getElementById("startDate").value)
-                formData.append("endDate", document.getElementById("endDate").value)
+                //- formData.append("startDate", document.getElementById("startDate").value)
+                //- formData.append("endDate", document.getElementById("endDate").value)
                 formData.append("file1", document.getElementById("file1").files[0])
                 formData.append("file2", document.getElementById("file2").files[0])
                 axios({

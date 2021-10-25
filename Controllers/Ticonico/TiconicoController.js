@@ -18,7 +18,8 @@ exports.getIndex = (req,res) => {
 exports.getCalculatedData = (req,res) => {
 
   const startMakeup = allMakeup.hasOwnProperty("ticonico") ? allMakeup["ticonico"] : 0
-  const datePeriod = `${moment(req.body.startDate).format("MM/DD")} - ${moment(req.body.endDate).format("MM/DD")}`
+  // const datePeriod = `${moment(req.body.startDate).format("MM/DD")} - ${moment(req.body.endDate).format("MM/DD")}`
+  const datePeriod = `${moment().startOf("isoweek").add(1, "day").format("MM/DD")} - ${moment().startOf("isoweek").add(7, "days").format("MM/DD")}`
 
   // Getting Data from DB
   const dbData = db.JSON().data !== '' ? JSON.parse(db.JSON().data) : null
