@@ -45,6 +45,8 @@ const villajos = require('./routes/villajos')
 const sc222 = require('./routes/sc222')
 const dso = require('./routes/dso')
 const bmt = require('./routes/bmt')
+const bidder = require('./routes/bidder')
+const blaker77 = require('./routes/blaker77')
 
 // Using Routes
 app.use('/',home)
@@ -87,6 +89,8 @@ app.use('/villajos',villajos)
 app.use('/sc222',sc222)
 app.use('/dso',dso)
 app.use('/bmt',bmt)
+app.use('/bidder',bidder)
+app.use('/blaker77',blaker77)
 
 // Setting View Engine
 app.set('view engine', 'pug')
