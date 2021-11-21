@@ -39,11 +39,27 @@
     "BMT": 5,
     "BIDDER": 5,
     "BLAKER77": 5,
+    "AR1": 5,
+    "AR3MAST": 5,
+    "ARK4MAST": 5,
+    "DALLMA": 5,
+    "HAYESMAST": 5,
+    "HOGS999MA": 5,
+    "ROLLMAST": 5,
+    "UCAMAST": 5,
+    "USA99MAST": 5,
+    "WESTMAST": 5,
     "AgentsPPH": {
         "AUSTIN2": 2.50,
         "WOODYMA": 4,
         "EAGSCOOT": 2.50,
         "MASTKALA1": 2.50,
-        "SAMFULK31": 4
+        "SAMFULK31": 4,
+        "AR1": 3,
+        "HOGS999MA": 3,
+        "ROLLMAST": 5,
+        "UCAMAST": 3.50,
+        "USA99MAST": 5.50,
+        "WESTMAST": 4
     }
 }
