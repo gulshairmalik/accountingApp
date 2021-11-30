@@ -14,10 +14,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // Controllers
-const Samfulk31Controller =  require('../Controllers/Samfulk31/Samfulk31Controller')
+const Kyzer21Controller =  require('../Controllers/Kyzer21/Kyzer21Controller')
 
-router.get('/', Samfulk31Controller.getIndex)
-router.post('/getCalculatedFile', upload.single("file"), Samfulk31Controller.getCalculatedData)
+router.get('/', Kyzer21Controller.getIndex)
+router.post('/getCalculatedFile', upload.single("file"), Kyzer21Controller.getCalculatedData)
 
 
 // Exporting Router Object to server

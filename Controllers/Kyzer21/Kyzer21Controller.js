@@ -6,12 +6,12 @@ const headfees = JSON.parse(fs.readFileSync('./headfees.json'))
 const playerCount = JSON.parse(fs.readFileSync('./playersCount.json'))
 const xl = require('excel4node')
 const wb = new xl.Workbook()
-const ws = wb.addWorksheet('SAMFULK31')
+const ws = wb.addWorksheet('KYZER21')
 const JSONdb = require('simple-json-db')
-const db = new JSONdb('./Controllers/Samfulk31/db.json')
+const db = new JSONdb('./Controllers/Kyzer21/db.json')
 
 exports.getIndex = (req,res) => {
-    res.render("samfulk31")
+    res.render("kyzer21")
 }
 
 exports.getCalculatedData = (req,res) => {
@@ -28,19 +28,19 @@ exports.getCalculatedData = (req,res) => {
 
     const totalAmountOfWeek = result[Object.keys(result)[0]].filter((x, i) => i !== 0).map((y) => y["F"]).reduce((a, b) => a + b, 0)
     const scooterTotal = totalAmountOfWeek / 2
-    const samFulk31Total = totalAmountOfWeek / 2
-    const headFees = (playerCount.find((x) => x.agentName === "SAMFULK31") && headfees.hasOwnProperty("SAMFULK31")) ? parseFloat(headfees["SAMFULK31"] * playerCount.find((x) => x.agentName === "SAMFULK31")["playersCount"]).toFixed(2) : 0
+    const kyzer21Total = totalAmountOfWeek / 2
+    const headFees = (playerCount.find((x) => x.agentName === "KYZER21") && headfees.hasOwnProperty("KYZER21")) ? parseFloat(headfees["KYZER21"] * playerCount.find((x) => x.agentName === "KYZER21")["playersCount"]).toFixed(2) : 0
     const scooterNet = scooterTotal - headFees
-    const samFulk31HF = (playerCount.find((x) => x.agentName === "SAMFULK31") && headfees["AgentsPPH"].hasOwnProperty("SAMFULK31")) ? parseFloat(headfees["AgentsPPH"]["SAMFULK31"] * playerCount.find((x) => x.agentName === "SAMFULK31")["playersCount"]).toFixed(2) : 0
-    const samFulk31Net = samFulk31Total - samFulk31HF
+    const kyzer21HF = (playerCount.find((x) => x.agentName === "KYZER21") && headfees["AgentsPPH"].hasOwnProperty("KYZER21")) ? parseFloat(headfees["AgentsPPH"]["KYZER21"] * playerCount.find((x) => x.agentName === "KYZER21")["playersCount"]).toFixed(2) : 0
+    const kyzer21Net = kyzer21Total - kyzer21HF
 
     const data = {
         "date": datePeriod.toString(),
         "total": totalAmountOfWeek,
         "scooterTotal": scooterTotal,
-        "samFulk31Total": samFulk31Total,
-        "samFulk31HF": samFulk31HF,
-        "samFulk31Net": samFulk31Net,
+        "kyzer21Total": kyzer21Total,
+        "kyzer21HF": kyzer21HF,
+        "kyzer21Net": kyzer21Net,
         "headFees": headFees,
         "scooterNet": scooterNet
     }
@@ -54,9 +54,9 @@ exports.getCalculatedData = (req,res) => {
         "Date",
         "Total",
         "Scooter Total",
-        "SamFulk31 Total",
-        "SamFulk31 HF",
-        "SamFulk31 Net",
+        "Kyzer21 Total",
+        "Kyzer21 HF",
+        "Kyzer21 Net",
         "Head Fees",
         "Scooter Net"
     ]
@@ -108,9 +108,9 @@ exports.getCalculatedData = (req,res) => {
         rowIndex++
     }) 
 
-    wb.write('./uploads/samfulk31.xlsx', (err, stat) => {
-        res.download('./uploads/samfulk31.xlsx', (err) => {
-            fsExtra.removeSync("./uploads/samfulk31.xlsx")
+    wb.write('./uploads/kyzer21.xlsx', (err, stat) => {
+        res.download('./uploads/kyzer21.xlsx', (err) => {
+            fsExtra.removeSync("./uploads/kyzer21.xlsx")
             fsExtra.removeSync(`./uploads/${req.file.originalname}`)
         })
     })
